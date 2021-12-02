@@ -1,14 +1,7 @@
 const fs = require('fs')
 
-fs.readFile('input.txt', 'utf8', (err, data) => {
-    if (err) {
-        console.error(err)
-        return
-    }
-
-    const tab = data.split('\n')
-
-    const resultPartOne = tab.reduce((acc, value) => {
+const getResultPartOne = (tab) => {
+    const resultObject = tab.reduce((acc, value) => {
         const t = value.split(" ")
         let newAcc = {...acc}
         switch (t[0]) {
@@ -25,9 +18,11 @@ fs.readFile('input.txt', 'utf8', (err, data) => {
         return newAcc
     }, { h: 0, d: 0 })
 
-    console.log('Result part one :', resultPartOne.h * resultPartOne.d)
+    return resultObject.h * resultObject.d
+}
 
-    const resultPartTwo = tab.reduce((acc, value) => {
+const getResultPartTwo = (tab) => {
+    const resultObject = tab.reduce((acc, value) => {
         const t = value.split(" ")
         let newAcc = { ...acc }
         switch (t[0]) {
@@ -46,5 +41,18 @@ fs.readFile('input.txt', 'utf8', (err, data) => {
 
     }, { h: 0, d: 0, aim: 0 })
 
-    console.log('Result part two :', resultPartTwo.h * resultPartTwo.d)
+    return resultObject.h * resultObject.d
+}
+
+fs.readFile('input.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.error(err)
+        return
+    }
+
+    const tab = data.split('\n')
+
+    console.log('Result part one :', getResultPartOne(tab))
+
+    console.log('Result part two :', getResultPartTwo(tab))
 })
