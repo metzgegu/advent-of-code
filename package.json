@@ -1,0 +1,13 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "repository": "https://github.com/metzgegu/advent-of-code.git",
+  "author": "metzgegu <guillaume.metzger@wizbii.com>",
+  "license": "MIT",
+  "scripts": {
+    "fix:lint": "npx standard --fix"
+  },
+  "dependencies": {
+    "standard": "16.0.4"
+  }
+}
