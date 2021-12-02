@@ -3,19 +3,12 @@ const fs = require('fs')
 const getResultPartOne = (tab) => {
     const resultObject = tab.reduce((acc, value) => {
         const t = value.split(" ")
-        let newAcc = {...acc}
-        switch (t[0]) {
-            case 'forward':
-                newAcc.h += parseInt(t[1])
-                break;
-            case 'up':
-                newAcc.d -= parseInt(t[1])
-                break;
-            case 'down':
-                newAcc.d += parseInt(t[1])
-                break
+        return {
+            ...acc,
+            ...(t[0] === 'forward' && { h: acc.h + parseInt(t[1]) }),
+            ...(t[0] === 'up' && { d: acc.d - parseInt(t[1]) }),
+            ...(t[0] === 'down' && { d: acc.d + parseInt(t[1]) })
         }
-        return newAcc
     }, { h: 0, d: 0 })
 
     return resultObject.h * resultObject.d
@@ -24,21 +17,12 @@ const getResultPartOne = (tab) => {
 const getResultPartTwo = (tab) => {
     const resultObject = tab.reduce((acc, value) => {
         const t = value.split(" ")
-        let newAcc = { ...acc }
-        switch (t[0]) {
-            case 'forward':
-                newAcc.d += parseInt(t[1]) * newAcc.aim
-                newAcc.h += parseInt(t[1])
-                break;
-            case 'up':
-                newAcc.aim -= parseInt(t[1])
-                break;
-            case 'down':
-                newAcc.aim += parseInt(t[1])
-                break
+        return {
+            ...acc,
+            ...(t[0] === 'forward' && { d: acc.d + parseInt(t[1]) * acc.aim, h: acc.h + parseInt(t[1]) }),
+            ...(t[0] === 'up' && { aim: acc.aim - parseInt(t[1]) }),
+            ...(t[0] === 'down' && { aim: acc.aim + parseInt(t[1]) })
         }
-        return newAcc
-
     }, { h: 0, d: 0, aim: 0 })
 
     return resultObject.h * resultObject.d
