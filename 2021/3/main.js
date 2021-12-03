@@ -1,4 +1,22 @@
-const fs = require('fs')
+import fs from 'fs'
+
+export function displayResultOfTheDay () {
+  fs.readFile('2021/3/input.txt', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+
+    const tab = data.split('\n')
+
+    console.log('')
+    console.log('---- Day 3 ----')
+
+    console.log('Result part one :', getResultPartOne(tab))
+
+    console.log('Result part two :', getResultPartTwo(tab))
+  })
+}
 
 const getNumberOf = (query, tab) => {
   return tab.reduce((acc, value) => {
@@ -64,16 +82,3 @@ const getResultPartTwo = (tab) => {
 
   return parseInt(oxygenRating, 2) * parseInt(co2Scrubber, 2)
 }
-
-fs.readFile('input.txt', 'utf8', (err, data) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-
-  const tab = data.split('\n')
-
-  console.log('Result part one :', getResultPartOne(tab))
-
-  console.log('Result part two :', getResultPartTwo(tab))
-})

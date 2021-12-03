@@ -1,11 +1,13 @@
 {
   "name": "advent-of-code",
   "version": "1.0.0",
+  "type": "module",
   "repository": "https://github.com/metzgegu/advent-of-code.git",
   "author": "metzgegu <guillaume.metzger@wizbii.com>",
   "license": "MIT",
   "scripts": {
-    "fix:lint": "npx standard --fix"
+    "fix:lint": "npx standard --fix",
+    "start": "node main.js"
   },
   "dependencies": {
     "standard": "16.0.4"

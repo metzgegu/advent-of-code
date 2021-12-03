@@ -1,4 +1,23 @@
-const fs = require('fs')
+import fs from 'fs'
+
+export function displayResultOfTheDay () {
+  fs.readFile('2021/2/input.txt', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+
+    const tab = data.split('\n')
+
+    console.log('')
+    console.log('---- Day 2 ----')
+
+    console.log('Result part one :', getResultPartOne(tab))
+
+    console.log('Result part two :', getResultPartTwo(tab))
+
+  })
+}
 
 const getResultPartOne = (tab) => {
   const resultObject = tab.reduce((acc, value) => {
@@ -27,16 +46,3 @@ const getResultPartTwo = (tab) => {
 
   return resultObject.h * resultObject.d
 }
-
-fs.readFile('input.txt', 'utf8', (err, data) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-
-  const tab = data.split('\n')
-
-  console.log('Result part one :', getResultPartOne(tab))
-
-  console.log('Result part two :', getResultPartTwo(tab))
-})
