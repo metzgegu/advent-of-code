@@ -15,7 +15,6 @@ export function displayResultOfTheDay () {
     console.log('Result part one :', getResultPartOne(tab))
 
     console.log('Result part two :', getResultPartTwo(tab))
-
   })
 }
 
