@@ -4,6 +4,7 @@ import { displayResultOfTheDay as displayResultOfTheDay3 } from './3/main.js'
 import { displayResultOfTheDay as displayResultOfTheDay4 } from './4/main.js'
 import { displayResultOfTheDay as displayResultOfTheDay5 } from './5/main.js'
 import { displayResultOfTheDay as displayResultOfTheDay6 } from './6/main.js'
+import { displayResultOfTheDay as displayResultOfTheDay7 } from './7/main.js'
 
 export const exerciceList = [
   displayResultOfTheDay1,
@@ -11,5 +12,6 @@ export const exerciceList = [
   displayResultOfTheDay3,
   displayResultOfTheDay4,
   displayResultOfTheDay5,
-  displayResultOfTheDay6
+  displayResultOfTheDay6,
+  displayResultOfTheDay7
 ]
