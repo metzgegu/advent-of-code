@@ -27,11 +27,12 @@ const getResultPartOne = (tab) => {
         return part1.at(i)
       }
     }
+    return
   }).filter(item => item)
 
-  const pointsList = typeItemList.map((item =>
-    item.charCodeAt(0) - (item == item.toUpperCase() ? 38 : 96)
-  ))
+  const pointsList = typeItemList.map(item =>
+    item.charCodeAt(0) - (item === item.toUpperCase() ? 38 : 96)
+  )
 
   return pointsList.reduce((acc, value) => acc + value, 0)
 }
@@ -50,9 +51,9 @@ const getResultPartTwo = (tab) => {
     }
   }
 
-  const pointsList = resultTab.map((item =>
-    item.charCodeAt(0) - (item == item.toUpperCase() ? 38 : 96)
-  ))
+  const pointsList = resultTab.map(item =>
+    item.charCodeAt(0) - (item === item.toUpperCase() ? 38 : 96)
+  )
 
   return pointsList.reduce((acc, value) => acc + value, 0)
 }
