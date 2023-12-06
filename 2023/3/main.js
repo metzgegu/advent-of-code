@@ -122,7 +122,7 @@ const findNumberRight = (line, currentIndex) => {
     newIndex++
   }
 
-  return theNumber != '' ? [theNumber] : []
+  return theNumber !== '' ? [theNumber] : []
 }
 
 const findNumberLeft = (line, currentIndex) => {
@@ -139,7 +139,7 @@ const findNumberLeft = (line, currentIndex) => {
     newIndex++
   }
 
-  return theNumber != '' ? [theNumber] : []
+  return theNumber !== '' ? [theNumber] : []
 }
 
 const findNumberAboveOrBelow = (line, currentIndex) => {
