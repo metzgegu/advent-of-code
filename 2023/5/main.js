@@ -30,7 +30,7 @@ const getResultPartOne = (lines) => {
     } else if (lines[i].includes('map:')) {
       // const specName = lines[i].split(' map:')[0]
       let y = i + 1
-      let map = []
+      const map = []
       while (y < lines.length && lines[y] !== '') {
         map.push(lines[y].split(' ').map(value => parseInt(value)))
 
@@ -49,7 +49,7 @@ const getResultPartOne = (lines) => {
         const destination = values[0]
         const source = values[1]
         const range = values[2]
-    
+
         const newValue = getValue(currentSeed, destination, source, range)
         if (newValue !== currentSeed) {
           newValues = newValue
@@ -73,7 +73,7 @@ const getResultPartTwo = (lines) => {
       i++
     } else if (lines[i].includes('map:')) {
       let y = i + 1
-      let map = []
+      const map = []
       while (y < lines.length && lines[y] !== '') {
         map.push(lines[y].split(' ').map(value => parseInt(value)))
 
@@ -97,13 +97,13 @@ const getResultPartTwo = (lines) => {
           const destination = values[0]
           const source = values[1]
           const range = values[2]
-      
+
           const newValue = getValue(currentSeed, destination, source, range)
           if (newValue !== currentSeed) {
             newValues = newValue
           }
         })
-  
+
         return newValues
       }, seed)
       if (result < minValue || minValue === undefined) {

@@ -23,9 +23,9 @@ const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const getResultPartOne = (tab) => {
   const result = []
   for (let lineIndex = 0; lineIndex < tab.length; lineIndex++) {
-    let tabLine = tab[lineIndex]
+    const tabLine = tab[lineIndex]
     let index = 0
-    while(index < tabLine.length) {
+    while (index < tabLine.length) {
       if (digits.includes(tabLine[index])) {
         let newIndex = index
         let theNumber = ''
@@ -41,18 +41,17 @@ const getResultPartOne = (tab) => {
         if (isSpecialCharInTheFront(newIndex - 1, tabLine, tab[lineIndex - 1], tab[lineIndex + 1], isSymbol)) {
           findSymbol = true
         }
-        if(findSymbol) {
+        if (findSymbol) {
           result.push(theNumber)
         }
         index = newIndex
       } else {
         index++
       }
-      
     }
   }
 
-  return result.reduce ((acc, value) => acc + parseInt(value), 0)
+  return result.reduce((acc, value) => acc + parseInt(value), 0)
 }
 
 const isSpecialCharInTheFront = (index, currentLine, previousLine, nextLine, isSpecialChar) => {
@@ -78,9 +77,9 @@ const isGear = (char) => {
 const getResultPartTwo = (tab) => {
   const result = []
   for (let lineIndex = 0; lineIndex < tab.length; lineIndex++) {
-    let tabLine = tab[lineIndex]
+    const tabLine = tab[lineIndex]
     let index = 0
-    while(index < tabLine.length) { 
+    while (index < tabLine.length) {
       if (isGear(tabLine[index])) {
         result.push({
           index,
@@ -92,12 +91,12 @@ const getResultPartTwo = (tab) => {
   }
 
   const ratioArray = result.map((element) => {
-    let index = element.index
-    let lineIndex = element.lineIndex
-    let tabLine = tab[lineIndex]
+    const index = element.index
+    const lineIndex = element.lineIndex
+    const tabLine = tab[lineIndex]
     let ratio = 0
 
-    let findNumbers = []
+    const findNumbers = []
 
     findNumbers.push(findNumberAboveOrBelow(tab[lineIndex + 1], index))
     findNumbers.push(findNumberAboveOrBelow(tab[lineIndex - 1], index))
@@ -109,16 +108,16 @@ const getResultPartTwo = (tab) => {
     if (flatFindNumbers.length === 2) {
       ratio = parseInt(flatFindNumbers[0]) * parseInt(flatFindNumbers[1])
     }
-    return ratio    
+    return ratio
   })
-  return ratioArray.reduce ((acc, value) => acc + value, 0)
+  return ratioArray.reduce((acc, value) => acc + value, 0)
 }
 
 const findNumberRight = (line, currentIndex) => {
-  let newIndex = currentIndex  + 1
+  let newIndex = currentIndex + 1
   if (newIndex >= line.length) return []
   let theNumber = ''
-  while(digits.includes(line[newIndex])) {
+  while (digits.includes(line[newIndex])) {
     theNumber += line[newIndex]
     newIndex++
   }
@@ -135,7 +134,7 @@ const findNumberLeft = (line, currentIndex) => {
 
   let newIndex = index
   let theNumber = ''
-  while(digits.includes(line[newIndex])) {
+  while (digits.includes(line[newIndex])) {
     theNumber += line[newIndex]
     newIndex++
   }
@@ -153,11 +152,11 @@ const findNumberAboveOrBelow = (line, currentIndex) => {
   }
 
   const numbersFound = []
-  while(index < indexes[2] || digits.includes(line[index])) {
+  while (index < indexes[2] || digits.includes(line[index])) {
     if (digits.includes(line[index])) {
       let newIndex = index
       let theNumber = ''
-      while(digits.includes(line[newIndex])) {
+      while (digits.includes(line[newIndex])) {
         theNumber += line[newIndex]
         newIndex++
       }

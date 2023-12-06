@@ -21,12 +21,12 @@ export function displayResultOfTheDay () {
 const getResultPartOne = (tab) => {
   let totalPoints = 0
   tab.forEach(line => {
-    let newLine = line.split(': ')[1]
-    const winningPart =  newLine.split(' | ')[0].split(' ').filter(value => value !== '')
-    const numberPart =  newLine.split(' | ')[1].split(' ').filter(value => value !== '')
+    const newLine = line.split(': ')[1]
+    const winningPart = newLine.split(' | ')[0].split(' ').filter(value => value !== '')
+    const numberPart = newLine.split(' | ')[1].split(' ').filter(value => value !== '')
 
     const pointsEarned = calculatePointsEarned(winningPart, numberPart)
-    totalPoints += pointsEarned 
+    totalPoints += pointsEarned
   })
   return totalPoints
 }
@@ -60,10 +60,10 @@ const getResultPartTwo = (tab) => {
 
   tab.forEach((line, index) => {
     const idGame = index + 1
-    
-    let newLine = line.split(': ')[1]
-    const winningPart =  newLine.split(' | ')[0].split(' ').filter(value => value !== '')
-    const numberPart =  newLine.split(' | ')[1].split(' ').filter(value => value !== '')
+
+    const newLine = line.split(': ')[1]
+    const winningPart = newLine.split(' | ')[0].split(' ').filter(value => value !== '')
+    const numberPart = newLine.split(' | ')[1].split(' ').filter(value => value !== '')
 
     const cardsEarned = countCardWinning(winningPart, numberPart)
     for (let i = 1; i <= cardsEarned; i++) {
@@ -93,7 +93,7 @@ const getResultPartTwo = (tab) => {
       cardsMap.set(idGame, cardsMap.get(idGame) + 1)
     } else {
       cardsMap.set(idGame, 1)
-    }    
+    }
   })
   return Array.from(cardsMap.values()).reduce((acc, value) => acc + value, 0)
 }

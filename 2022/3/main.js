@@ -27,7 +27,6 @@ const getResultPartOne = (tab) => {
         return part1.at(i)
       }
     }
-    return
   }).filter(item => item)
 
   const pointsList = typeItemList.map(item =>

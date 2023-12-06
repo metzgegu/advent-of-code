@@ -8,7 +8,7 @@ export const exerciceList = [
   displayResultOfTheDay1,
   displayResultOfTheDay2,
   displayResultOfTheDay3,
-  displayResultOfTheDay4,
+  displayResultOfTheDay4
   // Too long to execute on CI
   // displayResultOfTheDay5
 ]

@@ -22,7 +22,7 @@ const getResultPartOne = (tab) => {
   const cubesByGames = tab.map(line => {
     const idGame = line.match(/Game\s(\d+)/)[1]
 
-    const set = line.split(': ')[1].split('; ')    
+    const set = line.split(': ')[1].split('; ')
     return {
       idGame,
       sets: set.map(set => {
@@ -44,12 +44,11 @@ const getResultPartOne = (tab) => {
   return finalSum
 }
 
-
 const getResultPartTwo = (tab) => {
   const cubesByGames = tab.map(line => {
     const idGame = line.match(/Game\s(\d+)/)[1]
 
-    const set = line.split(': ')[1].split('; ')    
+    const set = line.split(': ')[1].split('; ')
     return {
       idGame,
       sets: set.map(set => {
@@ -67,7 +66,7 @@ const getResultPartTwo = (tab) => {
         }
       })
     })
-    
+
     return {
       idGame: game.idGame,
       result: ['red', 'blue', 'green'].reduce((acc, value) => (maxMap.get(value) || 1) * acc, 1)
