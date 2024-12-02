@@ -22,7 +22,6 @@ const cardsWeight = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3',
 
 const cardsWeightWithJoker = ['A', 'K', 'Q', 'T', '9', '8', '7', '6', '5', '4', '3', '2', 'J']
 
-
 const isFiveOfKind = (cards, joker = false) => {
   return cards.reduce((acc, value) => {
     if (joker && value === 'J') {
@@ -66,13 +65,13 @@ const isFullHouse = (cards, joker = false) => {
   }
 
   cards.forEach(card => {
-   if (cardsMap.has(card)) {
+    if (cardsMap.has(card)) {
       cardsMap.set(card, cardsMap.get(card) + 1)
     } else {
       cardsMap.set(card, 1)
     }
   })
-  
+
   return Array.from(cardsMap.values()).includes(3) && Array.from(cardsMap.values()).includes(2)
 }
 
@@ -171,13 +170,13 @@ const getResultPartOne = (lines, joker = false, cardsWeightTab = cardsWeight) =>
     }
 
     if (newMap.has(point)) {
-      newMap.set(point, [...newMap.get(point), { cards, bid: line.split(' ')[1] }] )
+      newMap.set(point, [...newMap.get(point), { cards, bid: line.split(' ')[1] }])
     } else {
       newMap.set(point, [{ cards, bid: line.split(' ')[1] }])
     }
   })
 
-  for(let i = 0; i < 7; i++) {
+  for (let i = 0; i < 7; i++) {
     const cards = newMap.get(i)
     if (cards) {
       const newCardsSorted = cards.sort((a, b) => {
@@ -185,7 +184,7 @@ const getResultPartOne = (lines, joker = false, cardsWeightTab = cardsWeight) =>
           if (cardsWeightTab.indexOf(a.cards[y]) > cardsWeightTab.indexOf(b.cards[y])) {
             return -1
           } else if (cardsWeightTab.indexOf(a.cards[y]) === cardsWeightTab.indexOf(b.cards[y])) {
-            
+
           } else {
             return 1
           }
@@ -198,10 +197,10 @@ const getResultPartOne = (lines, joker = false, cardsWeightTab = cardsWeight) =>
 
   const sortedTab = []
   let resultNumber = 0
-  for(let i = 0; i < 7; i++) {
+  for (let i = 0; i < 7; i++) {
     if (newMap.get(i)) {
       sortedTab.push(newMap.get(i))
-    } 
+    }
   }
 
   resultNumber = sortedTab.flat().reduce((acc, value, index) => {

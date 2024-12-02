@@ -12,7 +12,7 @@ export function displayResultOfTheDay () {
     const tab1 = []
     const tab2 = []
 
-    for (let i = 0 ; i < tab.length ; i++) {
+    for (let i = 0; i < tab.length; i++) {
       const line = tab[i].split('   ')
       tab1.push(line[0])
       tab2.push(line[1])
@@ -46,7 +46,7 @@ const getResultPartOne = (tab1, tab2) => {
 const getMin = (tab) => {
   let acc = 0
 
-  for (let i = 0; i < tab.length ; i++) {
+  for (let i = 0; i < tab.length; i++) {
     if (tab[i] < tab[acc]) {
       acc = i
     }
@@ -68,7 +68,7 @@ const getResultPartTwo = (tab1, tab2) => {
 const countOccurrence = (tab, value) => {
   let acc = 0
 
-  for (let i = 0 ; i < tab.length ; i++) {
+  for (let i = 0; i < tab.length; i++) {
     if (tab[i] === value) {
       acc++
     }
