@@ -10,7 +10,7 @@ export function displayResultOfTheDay () {
     const tab = data.split('\n')
 
     console.log('')
-    console.log('---- Day 1 ----')
+    console.log('---- Day 2 ----')
 
     console.log('Result part one :', getResultPartOne(tab))
 
