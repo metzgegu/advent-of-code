@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2024/2/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -22,7 +22,7 @@ const getResultPartOne = (tab) => {
   let count = 0
 
   for (let i = 0; i < tab.length; i++) {
-    const values = tab[i].split(' ').map(value => parseInt(value))
+    const values = tab[i].split(' ').map((value) => parseInt(value))
 
     if (getStatus(values) === 'safe') {
       count++
@@ -40,7 +40,8 @@ const getStatus = (values) => {
     const value = values[i]
     if (lastValue === value) {
       return 'unsafe'
-    } if (Math.abs(lastValue - value) > 3) {
+    }
+    if (Math.abs(lastValue - value) > 3) {
       return 'unsafe'
     }
 
@@ -61,7 +62,7 @@ const getResultPartTwo = (tab) => {
   let count = 0
 
   for (let i = 0; i < tab.length; i++) {
-    const values = tab[i].split(' ').map(value => parseInt(value))
+    const values = tab[i].split(' ').map((value) => parseInt(value))
 
     if (getStatus(values) === 'safe' || canOneBeRemoved(values)) {
       count++

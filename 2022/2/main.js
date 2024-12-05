@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2022/2/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -25,21 +25,23 @@ const getResultPartOne = (tab) => {
 }
 
 const getResultPartTwo = (tab) => {
-  const expectedResultMatch = tab.filter(match => match !== '').map(match => {
-    const neededScoreMatch = match.split(' ')
+  const expectedResultMatch = tab
+    .filter((match) => match !== '')
+    .map((match) => {
+      const neededScoreMatch = match.split(' ')
 
-    switch (neededScoreMatch[1]) {
-      case 'X':
-        // lose
-        return `${neededScoreMatch[0]} ${resultWieght.get(neededScoreMatch[0]).winningAgainst}`
-      case 'Y':
-        // draw
-        return `${neededScoreMatch[0]} ${resultWieght.get(neededScoreMatch[0]).equal}`
-      default:
-        // win
-        return `${neededScoreMatch[0]} ${resultWieght.get(neededScoreMatch[0]).losingAgainst}`
-    }
-  })
+      switch (neededScoreMatch[1]) {
+        case 'X':
+          // lose
+          return `${neededScoreMatch[0]} ${resultWieght.get(neededScoreMatch[0]).winningAgainst}`
+        case 'Y':
+          // draw
+          return `${neededScoreMatch[0]} ${resultWieght.get(neededScoreMatch[0]).equal}`
+        default:
+          // win
+          return `${neededScoreMatch[0]} ${resultWieght.get(neededScoreMatch[0]).losingAgainst}`
+      }
+    })
 
   const resultTab = getResultTab(expectedResultMatch)
 
@@ -47,18 +49,22 @@ const getResultPartTwo = (tab) => {
 }
 
 const getResultTab = (tab) => {
-  return tab.filter(match => match !== '').map(match => {
-    const resultMatch = match.split(' ')
-    if (resultWieght.get(resultMatch[0]).equal === resultMatch[1]) {
-      return resultWieght.get(resultMatch[1]).pts + 3
-    } else {
-      if (resultWieght.get(resultMatch[0]).winningAgainst === resultMatch[1]) {
-        return resultWieght.get(resultMatch[1]).pts
+  return tab
+    .filter((match) => match !== '')
+    .map((match) => {
+      const resultMatch = match.split(' ')
+      if (resultWieght.get(resultMatch[0]).equal === resultMatch[1]) {
+        return resultWieght.get(resultMatch[1]).pts + 3
       } else {
-        return resultWieght.get(resultMatch[1]).pts + 6
+        if (
+          resultWieght.get(resultMatch[0]).winningAgainst === resultMatch[1]
+        ) {
+          return resultWieght.get(resultMatch[1]).pts
+        } else {
+          return resultWieght.get(resultMatch[1]).pts + 6
+        }
       }
-    }
-  })
+    })
 }
 
 const resultWieght = new Map([
@@ -67,5 +73,5 @@ const resultWieght = new Map([
   ['C', { winningAgainst: 'Y', pts: 3, equal: 'Z', losingAgainst: 'X' }],
   ['X', { winningAgainst: 'C', pts: 1, equal: 'A', losingAgainst: 'B' }],
   ['Y', { winningAgainst: 'A', pts: 2, equal: 'B', losingAgainst: 'C' }],
-  ['Z', { winningAgainst: 'B', pts: 3, equal: 'C', losingAgainst: 'A' }]
+  ['Z', { winningAgainst: 'B', pts: 3, equal: 'C', losingAgainst: 'A' }],
 ])

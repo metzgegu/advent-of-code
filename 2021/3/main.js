@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2021/3/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -23,7 +23,7 @@ const getNumberOf = (query, tab) => {
     const newAcc = [...acc]
     for (let i = 0; i < value.length; i++) {
       if (value[i] === query) {
-        newAcc[i] = !newAcc[i] ? 1 : newAcc[i] += 1
+        newAcc[i] = !newAcc[i] ? 1 : (newAcc[i] += 1)
       }
     }
     return newAcc
@@ -31,22 +31,27 @@ const getNumberOf = (query, tab) => {
 }
 
 const getNumberOfTwoAndOne = (tab, i) => {
-  return tab.reduce((acc, value, index) => {
-    const newAcc = { ...acc }
-    return {
-      ...newAcc,
-      ...(value[i] === '1' && { one: [...acc.one, index] }),
-      ...(value[i] === '0' && { zero: [...acc.zero, index] })
-    }
-  }, { one: [], zero: [] })
+  return tab.reduce(
+    (acc, value, index) => {
+      const newAcc = { ...acc }
+      return {
+        ...newAcc,
+        ...(value[i] === '1' && { one: [...acc.one, index] }),
+        ...(value[i] === '0' && { zero: [...acc.zero, index] }),
+      }
+    },
+    { one: [], zero: [] }
+  )
 }
 
 const getResultPartOne = (tab) => {
   const numberOfOneList = getNumberOf('1', tab)
   const numberOfZeroList = getNumberOf('0', tab)
 
-  const gammaArray = numberOfOneList.map((numberOfOne, index) => numberOfZeroList[index] < numberOfOne ? 1 : 0)
-  const epsilonArray = gammaArray.map(value => value === 1 ? 0 : 1)
+  const gammaArray = numberOfOneList.map((numberOfOne, index) =>
+    numberOfZeroList[index] < numberOfOne ? 1 : 0
+  )
+  const epsilonArray = gammaArray.map((value) => (value === 1 ? 0 : 1))
 
   const gamma = gammaArray.reduce((acc, value) => acc + value, '')
   const epsilon = epsilonArray.reduce((acc, value) => acc + value, '')
@@ -55,11 +60,15 @@ const getResultPartOne = (tab) => {
 }
 
 const getOxygenArray = (numberOfTwoAndOne) => {
-  return numberOfTwoAndOne.one.length >= numberOfTwoAndOne.zero.length ? numberOfTwoAndOne.one : numberOfTwoAndOne.zero
+  return numberOfTwoAndOne.one.length >= numberOfTwoAndOne.zero.length
+    ? numberOfTwoAndOne.one
+    : numberOfTwoAndOne.zero
 }
 
 const getCo2Array = (numberOfTwoAndOne) => {
-  return numberOfTwoAndOne.zero.length <= numberOfTwoAndOne.one.length ? numberOfTwoAndOne.zero : numberOfTwoAndOne.one
+  return numberOfTwoAndOne.zero.length <= numberOfTwoAndOne.one.length
+    ? numberOfTwoAndOne.zero
+    : numberOfTwoAndOne.one
 }
 
 const processPartTwo = (tab, getNewArray, i) => {
@@ -71,7 +80,7 @@ const processPartTwo = (tab, getNewArray, i) => {
 
   const newArrayIndex = getNewArray(numberOfTwoAndOne)
 
-  const newArray = newArrayIndex.map(indexValue => tab[indexValue])
+  const newArray = newArrayIndex.map((indexValue) => tab[indexValue])
 
   return processPartTwo(newArray, getNewArray, i + 1)
 }

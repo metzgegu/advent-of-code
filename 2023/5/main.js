@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2023/5/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -19,7 +19,10 @@ export function displayResultOfTheDay () {
 }
 
 const getResultPartOne = (lines) => {
-  const seeds = lines[0].split('seeds: ')[1].split(' ').map(value => parseInt(value))
+  const seeds = lines[0]
+    .split('seeds: ')[1]
+    .split(' ')
+    .map((value) => parseInt(value))
   // console.log(seeds)
 
   const specsMap = []
@@ -32,7 +35,7 @@ const getResultPartOne = (lines) => {
       let y = i + 1
       const map = []
       while (y < lines.length && lines[y] !== '') {
-        map.push(lines[y].split(' ').map(value => parseInt(value)))
+        map.push(lines[y].split(' ').map((value) => parseInt(value)))
 
         y++
       }
@@ -42,7 +45,7 @@ const getResultPartOne = (lines) => {
     }
   }
 
-  const result = seeds.map(seed => {
+  const result = seeds.map((seed) => {
     return specsMap.reduce((currentSeed, lines) => {
       let newValues = currentSeed
       lines.forEach((values) => {
@@ -60,11 +63,14 @@ const getResultPartOne = (lines) => {
     }, seed)
   })
 
-  return result.reduce((acc, value) => value < acc ? value : acc, result[0])
+  return result.reduce((acc, value) => (value < acc ? value : acc), result[0])
 }
 
 const getResultPartTwo = (lines) => {
-  const seeds = lines[0].split('seeds: ')[1].split(' ').map(value => parseInt(value))
+  const seeds = lines[0]
+    .split('seeds: ')[1]
+    .split(' ')
+    .map((value) => parseInt(value))
 
   const specsMap = []
   let i = 1
@@ -75,7 +81,7 @@ const getResultPartTwo = (lines) => {
       let y = i + 1
       const map = []
       while (y < lines.length && lines[y] !== '') {
-        map.push(lines[y].split(' ').map(value => parseInt(value)))
+        map.push(lines[y].split(' ').map((value) => parseInt(value)))
 
         y++
       }

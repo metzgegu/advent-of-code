@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2023/4/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -20,10 +20,16 @@ export function displayResultOfTheDay () {
 
 const getResultPartOne = (tab) => {
   let totalPoints = 0
-  tab.forEach(line => {
+  tab.forEach((line) => {
     const newLine = line.split(': ')[1]
-    const winningPart = newLine.split(' | ')[0].split(' ').filter(value => value !== '')
-    const numberPart = newLine.split(' | ')[1].split(' ').filter(value => value !== '')
+    const winningPart = newLine
+      .split(' | ')[0]
+      .split(' ')
+      .filter((value) => value !== '')
+    const numberPart = newLine
+      .split(' | ')[1]
+      .split(' ')
+      .filter((value) => value !== '')
 
     const pointsEarned = calculatePointsEarned(winningPart, numberPart)
     totalPoints += pointsEarned
@@ -32,7 +38,7 @@ const getResultPartOne = (tab) => {
 }
 
 const calculatePointsEarned = (winningPart, numberPart) => {
-  const pointsEarned = numberPart.filter(number => {
+  const pointsEarned = numberPart.filter((number) => {
     if (winningPart.includes(number)) {
       return true
     }
@@ -46,7 +52,7 @@ const calculatePointsEarned = (winningPart, numberPart) => {
 }
 
 const countCardWinning = (winningPart, numberPart) => {
-  const pointsEarned = numberPart.filter(number => {
+  const pointsEarned = numberPart.filter((number) => {
     if (winningPart.includes(number)) {
       return true
     }
@@ -62,8 +68,14 @@ const getResultPartTwo = (tab) => {
     const idGame = index + 1
 
     const newLine = line.split(': ')[1]
-    const winningPart = newLine.split(' | ')[0].split(' ').filter(value => value !== '')
-    const numberPart = newLine.split(' | ')[1].split(' ').filter(value => value !== '')
+    const winningPart = newLine
+      .split(' | ')[0]
+      .split(' ')
+      .filter((value) => value !== '')
+    const numberPart = newLine
+      .split(' | ')[1]
+      .split(' ')
+      .filter((value) => value !== '')
 
     const cardsEarned = countCardWinning(winningPart, numberPart)
     for (let i = 1; i <= cardsEarned; i++) {

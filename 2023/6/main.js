@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2023/6/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -19,8 +19,14 @@ export function displayResultOfTheDay () {
 }
 
 const getResultPartOne = (lines) => {
-  const times = lines[0].split('Time:')[1].split(' ').filter(value => value !== '')
-  const distances = lines[1].split('Distance:')[1].split(' ').filter(value => value !== '')
+  const times = lines[0]
+    .split('Time:')[1]
+    .split(' ')
+    .filter((value) => value !== '')
+  const distances = lines[1]
+    .split('Distance:')[1]
+    .split(' ')
+    .filter((value) => value !== '')
   let result = 1
 
   for (let i = 0; i < times.length; i++) {
@@ -45,8 +51,16 @@ const getResultPartOne = (lines) => {
 }
 
 const getResultPartTwo = (lines) => {
-  const time = lines[0].split('Time:')[1].split(' ').filter(value => value !== '').reduce((acc, value) => '' + acc + value, '')
-  const distance = lines[1].split('Distance:')[1].split(' ').filter(value => value !== '').reduce((acc, value) => '' + acc + value, '')
+  const time = lines[0]
+    .split('Time:')[1]
+    .split(' ')
+    .filter((value) => value !== '')
+    .reduce((acc, value) => '' + acc + value, '')
+  const distance = lines[1]
+    .split('Distance:')[1]
+    .split(' ')
+    .filter((value) => value !== '')
+    .reduce((acc, value) => '' + acc + value, '')
 
   let countWaysBeatingRecord = 0
 

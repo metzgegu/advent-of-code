@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2021/4/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -19,7 +19,7 @@ export function displayResultOfTheDay () {
 }
 
 const getResultPartTwo = (tab) => {
-  const randomNumberList = tab[0].split(',').map(v => parseInt(v))
+  const randomNumberList = tab[0].split(',').map((v) => parseInt(v))
   let matrixList = getMatrixList(tab.slice(2, tab.length - 1))
 
   const winnerList = []
@@ -27,22 +27,40 @@ const getResultPartTwo = (tab) => {
 
   while (index < randomNumberList.length) {
     const randomNumber = randomNumberList[index]
-    matrixList = matrixList.map((matrix, i) => {
-      const newMatrix = markFoundedValueInMatrix(matrix, randomNumber)
-      if (hasMatrixWin(newMatrix)) {
-        winnerList.push({ matrix: newMatrix, index: i, numberOfTheWin: randomNumber, indexOfTheWin: index })
-        return undefined
-      }
-      return newMatrix
-    }).filter((v) => !!v)
+    matrixList = matrixList
+      .map((matrix, i) => {
+        const newMatrix = markFoundedValueInMatrix(matrix, randomNumber)
+        if (hasMatrixWin(newMatrix)) {
+          winnerList.push({
+            matrix: newMatrix,
+            index: i,
+            numberOfTheWin: randomNumber,
+            indexOfTheWin: index,
+          })
+          return undefined
+        }
+        return newMatrix
+      })
+      .filter((v) => !!v)
     index++
   }
 
-  const indexOfLastWinner = winnerList.reduce((i, winner) => winner.indexOfTheWin > i ? winner.indexOfTheWin : i, 0)
-  const lastWinner = winnerList.find(winner => winner.indexOfTheWin === indexOfLastWinner)
+  const indexOfLastWinner = winnerList.reduce(
+    (i, winner) => (winner.indexOfTheWin > i ? winner.indexOfTheWin : i),
+    0
+  )
+  const lastWinner = winnerList.find(
+    (winner) => winner.indexOfTheWin === indexOfLastWinner
+  )
 
   const result = lastWinner.matrix.reduce((accLine, vLine) => {
-    const lineSum = accLine + vLine.reduce((accRow, vRow) => vRow.status === 'notFound' ? accRow + vRow.value : accRow, 0)
+    const lineSum =
+      accLine +
+      vLine.reduce(
+        (accRow, vRow) =>
+          vRow.status === 'notFound' ? accRow + vRow.value : accRow,
+        0
+      )
     return lineSum
   }, 0)
 
@@ -50,7 +68,7 @@ const getResultPartTwo = (tab) => {
 }
 
 const getResultPartOne = (tab) => {
-  const randomNumberList = tab[0].split(',').map(v => parseInt(v))
+  const randomNumberList = tab[0].split(',').map((v) => parseInt(v))
   let matrixList = getMatrixList(tab.slice(2, tab.length - 1))
 
   let winner
@@ -69,7 +87,13 @@ const getResultPartOne = (tab) => {
   }
 
   const result = winner.matrix.reduce((accLine, vLine) => {
-    const lineSum = accLine + vLine.reduce((accRow, vRow) => vRow.status === 'notFound' ? accRow + vRow.value : accRow, 0)
+    const lineSum =
+      accLine +
+      vLine.reduce(
+        (accRow, vRow) =>
+          vRow.status === 'notFound' ? accRow + vRow.value : accRow,
+        0
+      )
     return lineSum
   }, 0)
   return result * winner.numberOfTheWin
@@ -88,12 +112,15 @@ const hasMatrixWin = (matrix) => {
       break
     }
   }
-  return matrix.some(row => row.every(v => v.status === 'founded')) || columnValid
+  return (
+    matrix.some((row) => row.every((v) => v.status === 'founded')) ||
+    columnValid
+  )
 }
 
 const markFoundedValueInMatrix = (matrix, number) => {
-  return matrix.map(row => {
-    return row.map(value => {
+  return matrix.map((row) => {
+    return row.map((value) => {
       if (value.value === number) {
         return { ...value, status: 'founded' }
       }
@@ -110,7 +137,13 @@ const getMatrixList = (tab) => {
       matrixList = [...matrixList, tmpMatrix]
       tmpMatrix = []
     } else {
-      tmpMatrix = [...tmpMatrix, tab[i].split(' ').filter(v => v !== '').map(value => ({ value: parseInt(value), status: 'notFound' }))]
+      tmpMatrix = [
+        ...tmpMatrix,
+        tab[i]
+          .split(' ')
+          .filter((v) => v !== '')
+          .map((value) => ({ value: parseInt(value), status: 'notFound' })),
+      ]
     }
     if (i === tab.length - 1) {
       matrixList = [...matrixList, tmpMatrix]

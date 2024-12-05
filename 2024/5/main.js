@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2024/5/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -24,7 +24,7 @@ const getResultPartOne = (tab) => {
 
   let i = 0
 
-  while(tab[i].length > 0) {
+  while (tab[i].length > 0) {
     const [key, value] = tab[i].split('|')
     rules[key] = [...(rules[key] ?? []), value]
     i++
@@ -32,7 +32,7 @@ const getResultPartOne = (tab) => {
 
   i++
 
-  while(i < tab.length) {
+  while (i < tab.length) {
     const isLineValid = computeIsLineValid(tab[i], rules)
     // console.log(tab[i], isLineValid)
     if (isLineValid) {
@@ -51,15 +51,15 @@ const computeIsLineValid = (line, rules) => {
   const values = line.split(',')
   const alreadySeen = []
 
-  for(let i = 0; i < values.length; i++) {
+  for (let i = 0; i < values.length; i++) {
     if (rules[values[i]]) {
-      for(let j = 0; j < rules[values[i]].length; j++) {
+      for (let j = 0; j < rules[values[i]].length; j++) {
         if (alreadySeen.includes(rules[values[i]][j])) {
           return false
         }
       }
     }
-    
+
     alreadySeen.push(values[i])
   }
 
@@ -72,7 +72,7 @@ const getResultPartTwo = (tab) => {
 
   let i = 0
 
-  while(tab[i].length > 0) {
+  while (tab[i].length > 0) {
     const [key, value] = tab[i].split('|')
     rules[key] = [...(rules[key] ?? []), value]
     i++
@@ -80,7 +80,7 @@ const getResultPartTwo = (tab) => {
 
   i++
 
-  while(i < tab.length) {
+  while (i < tab.length) {
     const isLineValid = computeIsLineValid(tab[i], rules)
 
     if (isLineValid !== true) {
@@ -100,7 +100,7 @@ const sortLine = (line, rules) => {
   let alreadySeen = []
   let i = 0
 
-  while(i < values.length) {
+  while (i < values.length) {
     if (rules[values[i]]) {
       const needToBeAfter = oneNeedToBeAfter(values[i], rules, alreadySeen)
 
@@ -119,12 +119,12 @@ const sortLine = (line, rules) => {
 
     i++
   }
-  
+
   return values.join(',')
 }
 
 const oneNeedToBeAfter = (value, rules, alreadySeen) => {
-  for(let i = 0; i < rules[value].length; i++) {
+  for (let i = 0; i < rules[value].length; i++) {
     if (alreadySeen.includes(rules[value][i])) {
       return rules[value][i]
     }

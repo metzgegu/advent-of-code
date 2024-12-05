@@ -14,5 +14,5 @@ export const exerciceList = [
   // Too long to execute on CI
   // displayResultOfTheDay5
   displayResultOfTheDay6,
-  displayResultOfTheDay7
+  displayResultOfTheDay7,
 ]

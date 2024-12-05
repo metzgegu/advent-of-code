@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2023/3/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -29,16 +29,38 @@ const getResultPartOne = (tab) => {
       if (digits.includes(tabLine[index])) {
         let newIndex = index
         let theNumber = ''
-        let findSymbol = isSpecialCharInTheBack(index, tabLine, tab[lineIndex - 1], tab[lineIndex + 1], isSymbol) ?? false
+        let findSymbol =
+          isSpecialCharInTheBack(
+            index,
+            tabLine,
+            tab[lineIndex - 1],
+            tab[lineIndex + 1],
+            isSymbol
+          ) ?? false
         while (digits.includes(tabLine[newIndex])) {
-          if (isSpecialCharAboveOrBelow(newIndex, tab[lineIndex - 1], tab[lineIndex + 1], isSymbol)) {
+          if (
+            isSpecialCharAboveOrBelow(
+              newIndex,
+              tab[lineIndex - 1],
+              tab[lineIndex + 1],
+              isSymbol
+            )
+          ) {
             findSymbol = true
           }
 
           theNumber += tabLine[newIndex]
           newIndex++
         }
-        if (isSpecialCharInTheFront(newIndex - 1, tabLine, tab[lineIndex - 1], tab[lineIndex + 1], isSymbol)) {
+        if (
+          isSpecialCharInTheFront(
+            newIndex - 1,
+            tabLine,
+            tab[lineIndex - 1],
+            tab[lineIndex + 1],
+            isSymbol
+          )
+        ) {
           findSymbol = true
         }
         if (findSymbol) {
@@ -54,16 +76,44 @@ const getResultPartOne = (tab) => {
   return result.reduce((acc, value) => acc + parseInt(value), 0)
 }
 
-const isSpecialCharInTheFront = (index, currentLine, previousLine, nextLine, isSpecialChar) => {
-  return isSpecialChar(currentLine[index + 1]) || (previousLine && isSpecialChar(previousLine[index + 1])) || (nextLine && isSpecialChar(nextLine[index + 1]))
+const isSpecialCharInTheFront = (
+  index,
+  currentLine,
+  previousLine,
+  nextLine,
+  isSpecialChar
+) => {
+  return (
+    isSpecialChar(currentLine[index + 1]) ||
+    (previousLine && isSpecialChar(previousLine[index + 1])) ||
+    (nextLine && isSpecialChar(nextLine[index + 1]))
+  )
 }
 
-const isSpecialCharAboveOrBelow = (index, previousLine, nextLine, isSpecialChar) => {
-  return (previousLine && isSpecialChar(previousLine[index])) || (nextLine && isSpecialChar(nextLine[index]))
+const isSpecialCharAboveOrBelow = (
+  index,
+  previousLine,
+  nextLine,
+  isSpecialChar
+) => {
+  return (
+    (previousLine && isSpecialChar(previousLine[index])) ||
+    (nextLine && isSpecialChar(nextLine[index]))
+  )
 }
 
-const isSpecialCharInTheBack = (index, currentLine, previousLine, nextLine, isSpecialChar) => {
-  return isSpecialChar(currentLine[index - 1]) || (previousLine && isSpecialChar(previousLine[index - 1])) || (nextLine && isSpecialChar(nextLine[index - 1]))
+const isSpecialCharInTheBack = (
+  index,
+  currentLine,
+  previousLine,
+  nextLine,
+  isSpecialChar
+) => {
+  return (
+    isSpecialChar(currentLine[index - 1]) ||
+    (previousLine && isSpecialChar(previousLine[index - 1])) ||
+    (nextLine && isSpecialChar(nextLine[index - 1]))
+  )
 }
 
 const isSymbol = (char) => {
@@ -83,7 +133,7 @@ const getResultPartTwo = (tab) => {
       if (isGear(tabLine[index])) {
         result.push({
           index,
-          lineIndex
+          lineIndex,
         })
       }
       index++

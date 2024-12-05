@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2023/2/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -19,48 +19,54 @@ export function displayResultOfTheDay () {
 }
 
 const getResultPartOne = (tab) => {
-  const cubesByGames = tab.map(line => {
+  const cubesByGames = tab.map((line) => {
     const idGame = line.match(/Game\s(\d+)/)[1]
 
     const set = line.split(': ')[1].split('; ')
     return {
       idGame,
-      sets: set.map(set => {
+      sets: set.map((set) => {
         return calculateNumberOfCube(set)
-      })
+      }),
     }
   })
 
-  const finalSum = cubesByGames.filter(game => {
-    let filter = true
-    game.sets.forEach(set => {
-      if (set.get('red') > 12 || set.get('blue') > 14 || set.get('green') > 13) {
-        filter = false
-      }
+  const finalSum = cubesByGames
+    .filter((game) => {
+      let filter = true
+      game.sets.forEach((set) => {
+        if (
+          set.get('red') > 12 ||
+          set.get('blue') > 14 ||
+          set.get('green') > 13
+        ) {
+          filter = false
+        }
+      })
+      return filter
     })
-    return filter
-  }).reduce((acc, value) => parseInt(value.idGame) + acc, 0)
+    .reduce((acc, value) => parseInt(value.idGame) + acc, 0)
 
   return finalSum
 }
 
 const getResultPartTwo = (tab) => {
-  const cubesByGames = tab.map(line => {
+  const cubesByGames = tab.map((line) => {
     const idGame = line.match(/Game\s(\d+)/)[1]
 
     const set = line.split(': ')[1].split('; ')
     return {
       idGame,
-      sets: set.map(set => {
+      sets: set.map((set) => {
         return calculateNumberOfCube(set)
-      })
+      }),
     }
   })
 
-  const result = cubesByGames.map(game => {
+  const result = cubesByGames.map((game) => {
     const maxMap = new Map()
-    game.sets.forEach(set => {
-      ['red', 'blue', 'green'].forEach(color => {
+    game.sets.forEach((set) => {
+      ;['red', 'blue', 'green'].forEach((color) => {
         if (!maxMap.get(color) || maxMap.get(color) < set.get(color)) {
           maxMap.set(color, set.get(color))
         }
@@ -69,7 +75,10 @@ const getResultPartTwo = (tab) => {
 
     return {
       idGame: game.idGame,
-      result: ['red', 'blue', 'green'].reduce((acc, value) => (maxMap.get(value) || 1) * acc, 1)
+      result: ['red', 'blue', 'green'].reduce(
+        (acc, value) => (maxMap.get(value) || 1) * acc,
+        1
+      ),
     }
   })
 
@@ -80,12 +89,15 @@ const calculateNumberOfCube = (set) => {
   const mapSet = new Map()
 
   const cubes = set.split(', ')
-  const result = cubes.map(cube => calculateCube(cube))
-  result.forEach(result => {
+  const result = cubes.map((cube) => calculateCube(cube))
+  result.forEach((result) => {
     if (!mapSet.get(result.color)) {
       mapSet.set(result.color, parseInt(result.number))
     } else {
-      mapSet.set(result.color, mapSet.get(result.color) + parseInt(result.number))
+      mapSet.set(
+        result.color,
+        mapSet.get(result.color) + parseInt(result.number)
+      )
     }
   })
 
@@ -96,6 +108,6 @@ const calculateCube = (cube) => {
   const result = cube.match(/(\d+)\s(blue|red|green)/)
   return {
     number: result[1],
-    color: result[2]
+    color: result[2],
   }
 }

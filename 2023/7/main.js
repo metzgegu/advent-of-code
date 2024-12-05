@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2023/7/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -18,27 +18,57 @@ export function displayResultOfTheDay () {
   })
 }
 
-const cardsWeight = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
+const cardsWeight = [
+  'A',
+  'K',
+  'Q',
+  'J',
+  'T',
+  '9',
+  '8',
+  '7',
+  '6',
+  '5',
+  '4',
+  '3',
+  '2',
+]
 
-const cardsWeightWithJoker = ['A', 'K', 'Q', 'T', '9', '8', '7', '6', '5', '4', '3', '2', 'J']
+const cardsWeightWithJoker = [
+  'A',
+  'K',
+  'Q',
+  'T',
+  '9',
+  '8',
+  '7',
+  '6',
+  '5',
+  '4',
+  '3',
+  '2',
+  'J',
+]
 
 const isFiveOfKind = (cards, joker = false) => {
-  return cards.reduce((acc, value) => {
-    if (joker && value === 'J') {
-      return acc
-    }
-    if (acc === value || acc === 'J') {
-      return value
-    }
-    return false
-  }, cards[0]) !== false
+  return (
+    cards.reduce((acc, value) => {
+      if (joker && value === 'J') {
+        return acc
+      }
+      if (acc === value || acc === 'J') {
+        return value
+      }
+      return false
+    }, cards[0]) !== false
+  )
 }
 
 const isFourOfKind = (cards, joker = false) => {
   const cardsMap = new Map()
-  cards.forEach(card => {
+  cards.forEach((card) => {
     if (joker && card === 'J') {
-      cardsWeightWithJoker.forEach(c => {
+      cardsWeightWithJoker.forEach((c) => {
         if (cardsMap.has(c)) {
           cardsMap.set(c, cardsMap.get(c) + 1)
         } else {
@@ -56,15 +86,23 @@ const isFourOfKind = (cards, joker = false) => {
 
 const isFullHouse = (cards, joker = false) => {
   const cardsMap = new Map()
-  const jokerCards = cards.filter(card => card === 'J')
-  if (joker && jokerCards.length === 2 && isOnePair(cards.filter(card => card !== 'J'))) {
+  const jokerCards = cards.filter((card) => card === 'J')
+  if (
+    joker &&
+    jokerCards.length === 2 &&
+    isOnePair(cards.filter((card) => card !== 'J'))
+  ) {
     return true
   }
-  if (joker && jokerCards.length === 1 && isTwoPairs(cards.filter(card => card !== 'J'))) {
+  if (
+    joker &&
+    jokerCards.length === 1 &&
+    isTwoPairs(cards.filter((card) => card !== 'J'))
+  ) {
     return true
   }
 
-  cards.forEach(card => {
+  cards.forEach((card) => {
     if (cardsMap.has(card)) {
       cardsMap.set(card, cardsMap.get(card) + 1)
     } else {
@@ -72,14 +110,17 @@ const isFullHouse = (cards, joker = false) => {
     }
   })
 
-  return Array.from(cardsMap.values()).includes(3) && Array.from(cardsMap.values()).includes(2)
+  return (
+    Array.from(cardsMap.values()).includes(3) &&
+    Array.from(cardsMap.values()).includes(2)
+  )
 }
 
 const isThreeOfKind = (cards, joker = false) => {
   const cardsMap = new Map()
-  cards.forEach(card => {
+  cards.forEach((card) => {
     if (joker && card === 'J') {
-      cardsWeightWithJoker.forEach(c => {
+      cardsWeightWithJoker.forEach((c) => {
         if (cardsMap.has(c)) {
           cardsMap.set(c, cardsMap.get(c) + 1)
         } else {
@@ -97,9 +138,9 @@ const isThreeOfKind = (cards, joker = false) => {
 
 const isTwoPairs = (cards, joker = false) => {
   const cardsMap = new Map()
-  cards.forEach(card => {
+  cards.forEach((card) => {
     if (joker && card === 'J') {
-      cardsWeightWithJoker.forEach(c => {
+      cardsWeightWithJoker.forEach((c) => {
         if (cardsMap.has(c)) {
           cardsMap.set(c, cardsMap.get(c) + 1)
         } else {
@@ -112,14 +153,16 @@ const isTwoPairs = (cards, joker = false) => {
       cardsMap.set(card, 1)
     }
   })
-  return Array.from(cardsMap.values()).filter(value => value === 2).length === 2
+  return (
+    Array.from(cardsMap.values()).filter((value) => value === 2).length === 2
+  )
 }
 
 const isOnePair = (cards, joker = false) => {
   const cardsMap = new Map()
-  cards.forEach(card => {
+  cards.forEach((card) => {
     if (joker && card === 'J') {
-      cardsWeightWithJoker.forEach(c => {
+      cardsWeightWithJoker.forEach((c) => {
         if (cardsMap.has(c)) {
           cardsMap.set(c, cardsMap.get(c) + 1)
         } else {
@@ -137,19 +180,25 @@ const isOnePair = (cards, joker = false) => {
 
 const isHighCard = (cards) => {
   const cardsMap = new Map()
-  cards.forEach(card => {
+  cards.forEach((card) => {
     if (cardsMap.has(card)) {
       cardsMap.set(card, cardsMap.get(card) + 1)
     } else {
       cardsMap.set(card, 1)
     }
   })
-  return Array.from(cardsMap.values()).filter(value => value === 1).length === 5
+  return (
+    Array.from(cardsMap.values()).filter((value) => value === 1).length === 5
+  )
 }
 
-const getResultPartOne = (lines, joker = false, cardsWeightTab = cardsWeight) => {
+const getResultPartOne = (
+  lines,
+  joker = false,
+  cardsWeightTab = cardsWeight
+) => {
   const newMap = new Map()
-  lines.map(line => {
+  lines.map((line) => {
     const cards = line.split(' ')[0].split('')
     let point = 0
 
@@ -170,7 +219,10 @@ const getResultPartOne = (lines, joker = false, cardsWeightTab = cardsWeight) =>
     }
 
     if (newMap.has(point)) {
-      newMap.set(point, [...newMap.get(point), { cards, bid: line.split(' ')[1] }])
+      newMap.set(point, [
+        ...newMap.get(point),
+        { cards, bid: line.split(' ')[1] },
+      ])
     } else {
       newMap.set(point, [{ cards, bid: line.split(' ')[1] }])
     }
@@ -181,10 +233,15 @@ const getResultPartOne = (lines, joker = false, cardsWeightTab = cardsWeight) =>
     if (cards) {
       const newCardsSorted = cards.sort((a, b) => {
         for (let y = 0; y < a.cards.length; y++) {
-          if (cardsWeightTab.indexOf(a.cards[y]) > cardsWeightTab.indexOf(b.cards[y])) {
+          if (
+            cardsWeightTab.indexOf(a.cards[y]) >
+            cardsWeightTab.indexOf(b.cards[y])
+          ) {
             return -1
-          } else if (cardsWeightTab.indexOf(a.cards[y]) === cardsWeightTab.indexOf(b.cards[y])) {
-
+          } else if (
+            cardsWeightTab.indexOf(a.cards[y]) ===
+            cardsWeightTab.indexOf(b.cards[y])
+          ) {
           } else {
             return 1
           }

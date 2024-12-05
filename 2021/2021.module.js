@@ -17,5 +17,5 @@ export const exerciceList = [
   displayResultOfTheDay6,
   displayResultOfTheDay7,
   displayResultOfTheDay8,
-  displayResultOfTheDay9
+  displayResultOfTheDay9,
 ]

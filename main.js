@@ -3,7 +3,7 @@ import { exerciceList as exerciceList2022 } from './2022/2022.module.js'
 import { exerciceList as exerciceList2023 } from './2023/2023.module.js'
 import { exerciceList as exerciceList2024 } from './2024/2024.module.js'
 
-function main () {
+function main() {
   // console.log('')
   // console.log('#### 2021 ####')
 
@@ -22,7 +22,7 @@ function main () {
   console.log('')
   console.log('#### 2024 ####')
 
-  exerciceList2024.map(seeResult => seeResult())
+  exerciceList2024.map((seeResult) => seeResult())
 }
 
 main()

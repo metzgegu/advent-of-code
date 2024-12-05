@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2024/4/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -60,14 +60,18 @@ const getResultPartOne = (tab) => {
   }
 
   for (let i = 0; i < diagonalRightTab.length; i++) {
-    diagonalRightCount += [...diagonalRightTab[i].matchAll(/(?=(XMAS|SAMX))/g)].length
+    diagonalRightCount += [...diagonalRightTab[i].matchAll(/(?=(XMAS|SAMX))/g)]
+      .length
   }
 
   for (const i in diagonalLeftTab) {
-    diagonalLeftCount += [...diagonalLeftTab[i].matchAll(/(?=(XMAS|SAMX))/g)].length
+    diagonalLeftCount += [...diagonalLeftTab[i].matchAll(/(?=(XMAS|SAMX))/g)]
+      .length
   }
 
-  return horizontalCount + verticalCount + diagonalRightCount + diagonalLeftCount
+  return (
+    horizontalCount + verticalCount + diagonalRightCount + diagonalLeftCount
+  )
 }
 
 const getResultPartTwo = (tab) => {
@@ -78,22 +82,42 @@ const getResultPartTwo = (tab) => {
       if (tab[i][j] === 'A') {
         // M M
         // S S
-        if (tab[i - 1][j - 1] === 'M' && tab[i - 1][j + 1] === 'M' && tab[i + 1][j + 1] === 'S' && tab[i + 1][j - 1] === 'S') {
+        if (
+          tab[i - 1][j - 1] === 'M' &&
+          tab[i - 1][j + 1] === 'M' &&
+          tab[i + 1][j + 1] === 'S' &&
+          tab[i + 1][j - 1] === 'S'
+        ) {
           count++
         }
         // S S
         // M M
-        if (tab[i - 1][j - 1] === 'S' && tab[i - 1][j + 1] === 'S' && tab[i + 1][j + 1] === 'M' && tab[i + 1][j - 1] === 'M') {
+        if (
+          tab[i - 1][j - 1] === 'S' &&
+          tab[i - 1][j + 1] === 'S' &&
+          tab[i + 1][j + 1] === 'M' &&
+          tab[i + 1][j - 1] === 'M'
+        ) {
           count++
         }
         // M S
         // M S
-        if (tab[i - 1][j - 1] === 'M' && tab[i - 1][j + 1] === 'S' && tab[i + 1][j + 1] === 'S' && tab[i + 1][j - 1] === 'M') {
+        if (
+          tab[i - 1][j - 1] === 'M' &&
+          tab[i - 1][j + 1] === 'S' &&
+          tab[i + 1][j + 1] === 'S' &&
+          tab[i + 1][j - 1] === 'M'
+        ) {
           count++
         }
         // S M
         // S M
-        if (tab[i - 1][j - 1] === 'S' && tab[i - 1][j + 1] === 'M' && tab[i + 1][j + 1] === 'M' && tab[i + 1][j - 1] === 'S') {
+        if (
+          tab[i - 1][j - 1] === 'S' &&
+          tab[i - 1][j + 1] === 'M' &&
+          tab[i + 1][j + 1] === 'M' &&
+          tab[i + 1][j - 1] === 'S'
+        ) {
           count++
         }
       }

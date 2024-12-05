@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2024/1/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)

@@ -6,10 +6,10 @@
   "author": "metzgegu <guillaume.metzger@wizbii.com>",
   "license": "MIT",
   "scripts": {
-    "fix:lint": "npx standard --fix",
+    "lint:fix": "prettier . --write",
     "start": "node main.js"
   },
   "dependencies": {
-    "standard": "16.0.4"
+    "prettier": "^3.4.2"
   }
 }

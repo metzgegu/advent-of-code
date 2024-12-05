@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2022/1/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -21,11 +21,11 @@ export function displayResultOfTheDay () {
 }
 
 const getResultPartOne = (elfSum) => {
-  return elfSum.reduce((prev, value) => prev < value ? value : prev, 0)
+  return elfSum.reduce((prev, value) => (prev < value ? value : prev), 0)
 }
 
 const getResultPartTwo = (elfSum) => {
-  const sorted = elfSum.sort((a, b) => a > b ? -1 : 1)
+  const sorted = elfSum.sort((a, b) => (a > b ? -1 : 1))
 
   return sorted[0] + sorted[1] + sorted[2]
 }
@@ -33,9 +33,11 @@ const getResultPartTwo = (elfSum) => {
 const getElfSum = (tab) => {
   const tabSum = []
   let tmpTab = []
-  tab.forEach(value => {
+  tab.forEach((value) => {
     if (value === '') {
-      tabSum.push(tmpTab.reduce((prev, value) => parseInt(prev) + parseInt(value), 0))
+      tabSum.push(
+        tmpTab.reduce((prev, value) => parseInt(prev) + parseInt(value), 0)
+      )
       tmpTab = []
     } else {
       tmpTab.push(value)

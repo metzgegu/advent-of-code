@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2022/4/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -19,20 +19,34 @@ export function displayResultOfTheDay () {
 }
 
 const getResultPartOne = (tab) => {
-  const pairList = tab.map(value => value.split(',').map(v => ({ x: parseInt(v.split('-')[0]), y: parseInt(v.split('-')[1]) })))
+  const pairList = tab.map((value) =>
+    value.split(',').map((v) => ({
+      x: parseInt(v.split('-')[0]),
+      y: parseInt(v.split('-')[1]),
+    }))
+  )
 
-  const includedPair = pairList.filter(pair =>
-    (pair[0].x >= pair[1].x && pair[0].y <= pair[1].y) || (pair[1].x >= pair[0].x && pair[1].y <= pair[0].y)
+  const includedPair = pairList.filter(
+    (pair) =>
+      (pair[0].x >= pair[1].x && pair[0].y <= pair[1].y) ||
+      (pair[1].x >= pair[0].x && pair[1].y <= pair[0].y)
   )
 
   return includedPair.length
 }
 
 const getResultPartTwo = (tab) => {
-  const pairList = tab.map(value => value.split(',').map(v => ({ x: parseInt(v.split('-')[0]), y: parseInt(v.split('-')[1]) })))
+  const pairList = tab.map((value) =>
+    value.split(',').map((v) => ({
+      x: parseInt(v.split('-')[0]),
+      y: parseInt(v.split('-')[1]),
+    }))
+  )
 
-  const overlapPair = pairList.filter(pair =>
-    (pair[0].y >= pair[1].x && pair[0].x <= pair[1].x) || (pair[0].x <= pair[1].y && pair[0].x >= pair[1].x)
+  const overlapPair = pairList.filter(
+    (pair) =>
+      (pair[0].y >= pair[1].x && pair[0].x <= pair[1].x) ||
+      (pair[0].x <= pair[1].y && pair[0].x >= pair[1].x)
   )
 
   return overlapPair.length

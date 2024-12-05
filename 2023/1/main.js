@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export function displayResultOfTheDay () {
+export function displayResultOfTheDay() {
   fs.readFile('2023/1/input.txt', 'utf8', (err, data) => {
     if (err) {
       console.error(err)
@@ -20,22 +20,37 @@ export function displayResultOfTheDay () {
 
 const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-const digitsWords = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+const digitsWords = [
+  '',
+  'one',
+  'two',
+  'three',
+  'four',
+  'five',
+  'six',
+  'seven',
+  'eight',
+  'nine',
+]
 
 const getResultPartOne = (tab) => {
-  return tab.map((value) => {
-    const charArray = value.split('')
-    const strNumber = `${findFirstNumber(charArray)}${findFirstNumber(charArray.reverse())}`
-    return parseInt(strNumber)
-  }).reduce((acc, value) => acc + value)
+  return tab
+    .map((value) => {
+      const charArray = value.split('')
+      const strNumber = `${findFirstNumber(charArray)}${findFirstNumber(charArray.reverse())}`
+      return parseInt(strNumber)
+    })
+    .reduce((acc, value) => acc + value)
 }
 
 const getResultPartTwo = (tab) => {
-  return tab.map((value) => {
-    const charArray = value.split('')
-    const strNumber = `${findDigitWordOrDigitInString(charArray)}${findDigitWordOrDigitInString(charArray.reverse(), true)}`
-    return parseInt(strNumber)
-  }).reduce((acc, value) => acc + value)
+  return tab
+    .map((value) => {
+      const charArray = value.split('')
+      const strNumber = `${findDigitWordOrDigitInString(charArray)}${findDigitWordOrDigitInString(charArray.reverse(), true)}`
+      return parseInt(strNumber)
+    })
+    .reduce((acc, value) => acc + value)
 }
 
 const findFirstNumber = (str) => {
@@ -53,9 +68,15 @@ const findDigitWordOrDigitInString = (str, reverse = false) => {
     } else {
       let myDigitsWords = digitsWords
       if (reverse) {
-        myDigitsWords = digitsWords.map(element => element.split('').reverse().join(''))
+        myDigitsWords = digitsWords.map((element) =>
+          element.split('').reverse().join('')
+        )
       }
-      const result = myDigitsWords.map((element, index) => recurence(element, charArray.slice(i)) !== -1 ? index : -1).find(element => element !== -1)
+      const result = myDigitsWords
+        .map((element, index) =>
+          recurence(element, charArray.slice(i)) !== -1 ? index : -1
+        )
+        .find((element) => element !== -1)
       if (result) {
         first = result
         break
